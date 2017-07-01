@@ -1,4 +1,7 @@
 import * as vcr from '@nofrills/vcr'
+import * as validator from 'validator'
+
+import zipcodes = require('zipcodes-regex')
 
 import { TypeDefinition } from './TypeDefinition'
 
@@ -9,8 +12,6 @@ interface TypeDefinitions {
 }
 
 const PATTERN = {
-  BASE64: `^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$`,
-  EMAIL: `^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$`,
   PHONE: `^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$`,
   URI: `(?:(\w+):\/\/)(?:(\w+:['"]?\w+?['"]?)@)?([\w\-\.]+)+(\/[\w\/]+\/?)?(?:[\/\?]?([\w\=\&'"]+)?)`,
 }
@@ -30,7 +31,7 @@ const TypeDefinitions: TypeDefinitions = {
   base64: {
     nullable: true,
     type: 'Base64',
-    validator: (value: string) => validate(value, PATTERN.BASE64),
+    validator: (value: string) => validator.isBase64(value),
   },
   boolean: {
     nullable: true,
@@ -48,7 +49,7 @@ const TypeDefinitions: TypeDefinitions = {
     property: 'max',
     type: 'email',
     typebase: 'string',
-    validator: (value: string) => validate(value, PATTERN.EMAIL),
+    validator: (value: string) => validator.isEmail(value),
   },
   error: {
     nullable: true,
@@ -74,6 +75,12 @@ const TypeDefinitions: TypeDefinitions = {
     type: 'phone',
     typebase: 'string',
     validator: (value: string) => validate(value, PATTERN.PHONE, 'i'),
+  },
+  postalcode: {
+    nullable: true,
+    type: 'postalcode',
+    typebase: 'string',
+    validator: (value: string, country?: string) => validate(value, zipcodes[country || 'US'])
   },
   regex: {
     nullable: true,

@@ -10,8 +10,8 @@ export interface TypeParserOptions extends ParserOptions {
 }
 
 export class TypeParser extends Parser {
-  public static from(type: string): types.TypeDefinition {
-    return (new TypeParser()).parse(type)
+  public static from(typestr: string): types.TypeDefinition {
+    return (new TypeParser()).parse(typestr)
   }
 
   public static realtype(name: string): types.TypeDefinition {
@@ -34,9 +34,13 @@ export class TypeParser extends Parser {
     return types.Resolve(name)
   }
 
-  public static validate(value: any, typedef: types.TypeDefinition): boolean {
-    if (typedef.validator) {
-      return typedef.validator(value)
+  public static validate(typedef: types.TypeDefinition | string, value: any): boolean {
+    const type: types.TypeDefinition = (typeof typedef === 'string')
+      ? types.Resolve(typedef)
+      : typedef
+
+    if (typeof type.validator === 'function') {
+      return type.validator(value)
     }
     return true
   }

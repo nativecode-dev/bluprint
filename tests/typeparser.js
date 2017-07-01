@@ -36,4 +36,20 @@ describe('when using {TypeParser}', () => {
       expect(typedef.type).to.equal('String')
     })
   })
+
+  describe('to validate values', () => {
+    it('should check invalid email', () => {
+      const type = 'email'
+      const value = 'Nobody <nobody@nowhere.com>'
+      const sut = parsers.TypeParser.validate(type, value)
+      expect(sut).to.be.false
+    })
+
+    it('should check valid email', () => {
+      const type = 'email'
+      const value = 'nobody@nowhere.com'
+      const sut = parsers.TypeParser.validate(type, value)
+      expect(sut).to.be.true
+    })
+  })
 })
