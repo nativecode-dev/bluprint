@@ -1,0 +1,11 @@
+.vscode/
+node_modules/
+
+.gitignore
+tsconfig.json
+tslint.json
+
+lib/**/*.map
+
+*.log
+*.tgz
