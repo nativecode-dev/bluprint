@@ -3,8 +3,9 @@
   "description": "Allows definition of object schemas.",
   "homepage": "https://github.com/nativecode-dev/nofrills-bluprint#readme",
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
   "name": "@nofrills/bluprint",
+  "types": "./lib/index.d.ts",
   "version": "0.0.1",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-bluprint/issues"
