@@ -1,0 +1,20 @@
+{
+  "user": {
+    "account": {
+      "email": "email",
+      "password": {
+        "hash": "base64",
+        "salt": "string:128"
+      },
+      "phone": "phone"
+    },
+    "address": {
+      "number": "number",
+      "street": "string:256",
+      "zipcode": {
+        "max": 16,
+        "type": "string"
+      }
+    }
+  }
+}

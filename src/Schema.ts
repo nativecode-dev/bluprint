@@ -1,5 +1,5 @@
-import { TypeDefinition } from './types'
+import { Type } from '@nofrills/types'
 
 export interface Schema {
-  [key: string]: any | TypeDefinition
+  [key: string]: any | Type
 }
