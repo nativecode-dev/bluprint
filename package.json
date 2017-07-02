@@ -11,9 +11,9 @@
     "url": "https://github.com/nativecode-dev/nofrills-bluprint/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln": "^0.2.3",
-    "@nofrills/scrubs": "^0.4.0",
-    "@nofrills/types": "^0.2.0"
+    "@nofrills/lincoln": "^0.3.2",
+    "@nofrills/scrubs": "^0.4.5",
+    "@nofrills/types": "^0.3.0"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
@@ -38,6 +38,7 @@
     "start": "node lib/",
     "prestart": "npm run build",
     "test": "mocha tests/",
-    "pretest": "npm run build"
+    "pretest": "npm run build",
+    "prepublish": "npm run test"
   }
 }
