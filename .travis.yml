@@ -1,6 +1,22 @@
 language: node_js
 node_js:
-  - "node"
-  - "6"
+  - node
+  - '6'
 os:
   - linux
+after_success: npm run coveralls
+jobs:
+  include:
+    - stage: npm release
+      node_js: '6'
+      before_deploy: npm run build
+      script: echo "Deploying to npm ..."
+      deploy:
+        provider: npm
+        email: reginfo@nativecode.com
+        api_key:
+          secure: >-
+            H89HBHBqPl+LbfW58u7QsneWUn5U0gNIelBwAHpGJyihfRyGa7w2Dc0/64JWaWQfKPa/cNL8W80EpdEMWw1Vhl64XLo+KJhOxAhKmYHkKLHIJ2QlVfMk8usO/6Oh+daOtzPwnY5+GuddwcujMy/3+PnzKlSZ55x5MjMrBv70bfnfB6PiCEkA1pm1ZXDXs8ChZocs/B9REZxoUbQ0Yn7J0ePYZru5iH5brkxrLdPM2OlrwbwdJ/sIZW+nUTu5DhSlRp4HpNf5SUZorDlVnTyPId5UC2JgAYnrN5FtdwdZvxx2Ria4JxEYs5q5ORLeAhmpvcbSOFiJeqIW036Q3I6enWNsZwTjoU9QbVBD5z9pCAgCym66umVkxceqqhZk2tad50KTTq274Uo+yFtQ3DurSIT670TkGPT96X/0Uxlac4AO7G8El8zalardf2M4wibZ503RUZlyxPDsEJJQvS+6wRYox/+NoCZFzpwQ5yeAebhJXC8y4xrQGUmm08bX0TzzootrMvTGifNh/h6wJINLM35/YcHU6bWA97Pip2PDo31WuAh7untyYSXIppG844jKfBq+Y50bhZ3RFzFmHdT6871D1BIz3vkDNHvFu9jMOO6RNFdWPo2hv81/SIS+fJiGInZ0Z0vpzcKJ9ju9SPSM5uk7JfnRXNO2uXhBt/8WvAc=
+        'on':
+          branch: master
+        skip_cleanup: true
