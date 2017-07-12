@@ -10,9 +10,6 @@
     "pretty": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es5",
-    "typeRoots": [
-      "src/declarations/"
-    ]
+    "target": "es2015"
   }
 }

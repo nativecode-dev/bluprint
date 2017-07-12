@@ -6,14 +6,14 @@
   "main": "./lib/index.js",
   "name": "@nofrills/bluprint",
   "types": "./lib/index.d.ts",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "bugs": {
     "url": "https://github.com/nativecode-dev/nofrills-bluprint/issues"
   },
   "dependencies": {
-    "@nofrills/lincoln": "^0.6.0",
-    "@nofrills/scrubs": "^0.6.0",
-    "@nofrills/types": "^0.6.1"
+    "@nofrills/lincoln-debug": "^0.3.0",
+    "@nofrills/scrubs": "^0.8.0",
+    "@nofrills/types": "^0.8.0"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
@@ -21,7 +21,9 @@
     "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.6",
     "chai": "^4.0.2",
+    "cross-env": "^5.0.1",
     "mocha": "^3.4.2",
+    "nyc": "^11.0.3",
     "rimraf": "^2.6.1",
     "tslint": "^5.4.3",
     "typescript": "^2.4.1"
@@ -35,11 +37,11 @@
     "prebuild": "rimraf lib/",
     "postbuild": "npm run lint",
     "lint": "tslint src/",
-    "start": "node lib/",
-    "prestart": "npm run build",
-    "test": "mocha tests/",
+    "test": "nyc mocha --recursive tests/",
     "pretest": "npm run build",
-    "prepublish": "npm run test",
-    "push": "npm publish --access public"
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "push": "npm publish --access public",
+    "prepush": "npm run test",
+    "clean": "rimraf .nyc_output && rimraf coverage && rimraf lib"
   }
 }

@@ -1,6 +1,7 @@
+.nyc_output/
 .vscode/
+coverage/
 lib/
 node_modules/
 
-*.log
-*.tgz
+npm-debug.log

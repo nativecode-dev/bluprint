@@ -1,8 +1,3 @@
-import * as logging from '@nofrills/lincoln'
-import * as scrubs from '@nofrills/scrubs'
+import { Lincoln } from '@nofrills/lincoln-debug'
 
-const options: logging.Options = {
-  namespace: 'nativecode:bluprint',
-}
-
-export const Logger: logging.Lincoln = new logging.Lincoln(options)
+export const Logger: Lincoln = new Lincoln('nativecode:bluprint')
